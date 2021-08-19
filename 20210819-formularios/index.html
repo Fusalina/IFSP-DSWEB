@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="scripts/app.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.js"
+        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <title>Atividade 01 - Relembrar</title>
+</head>
+
+<body onload="init_load();">
+    
+    <div class="jumbotron text-center">
+        <h1>Atividade 01 - Relembrar</h1>
+        <p>Construção de formulario utilizando bootstrap e API</p>
+    </div>
+    <!--
+•	Nome, (No máximo 50 caracteres)
+•	Data de nascimento, (Validar se a data é válida)
+•	Rua,
+•	Bairro,
+•	Cidade, (Exiba um dropdown list baseado no estado selecionado)
+•	Estado, (Exiba um dropdownlist)
+•	País. (Exiba um dropdown list)
+    -->
+    <div class="container justify-content-center">
+        <form>
+            <div class="form-group">
+                <label for="name">Nome</label>
+                <input type="text" id="name" class="form-control" placeholder="Insira seu nome"
+                    onkeydown="limit_name(this);" onkeyup="limit_name(this);">
+            </div>
+            <div class="form-group">
+                <label for="birth">Data de Nascimento</label>
+                <input type="date" id="birth" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="rue">Endereço</label>
+                <input type="text" id="rue" class="form-control" placeholder="Insira a sua rua/avenida">
+                <input type="text" id="neighborhood" class="form-control" placeholder="Insira seu Bairro">
+            </div>
+            <div class="form-group">
+                <label for="get_estados">Selecione seu Estado</label>
+                <select name="get_estados" id="get_estados" class="form-control" onchange="get_cities2();"></select>
+            </div>
+            <div class="form-group">
+                <label for="get_cities">Selecione sua Cidade</label>
+                <select name="get_cities" id="get_cities" class="form-control"></select>
+            </div>
+            <div class="form-group">
+                <label for="get_country">Selecione um País</label>
+                <select name="get_country" id="get_country" class="form-control"></select>
+            </div>
+        </form>
+
+        <footer>
+            <div class="jumbotron text-center">
+                © 2021 Copyright: Carolina Zanotto
+            </div>
+        </footer>
+    </div>
+
+
+</body>
+
+</html>
