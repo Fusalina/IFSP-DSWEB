@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { Redirect } from 'react-router';
 import Books from './components/Books/Books';
 import NewBook from './components/NewBook/NewBook';
 import Header from './components/Header/Header';
+import FullBook from './components/FullBook/FullBook';
 import './App.css';
 
 function App() {
@@ -23,14 +25,14 @@ function App() {
   const [books, setBooks] = useState(
     [
       {
-        id: 0,
+        id: 1,
         url: "https://site.claricelispector.ims.com.br/wp-content/uploads/2020/05/Capa_A_descoberta_do_mundo.jpg",
         name: "A descoberta do mundo",
         author: "Clarice Lispector",
         pages: "480"
       },
       {
-        id: 1,
+        id: 2,
         url: "https://m.media-amazon.com/images/I/61V6WTHOshL.jpg",
         name: "Gênero e desigualdades",
         author: "Flávia Biroli",
@@ -98,16 +100,24 @@ function App() {
       <div className="App">
         <Header />
         <h1>Livros</h1>
-        <Redirect from="/" to="/livros" exact/>
-        <Route path="/livros" exact>
-          <Books books={books} deleteBookHandler={deleteBookHandler} />
-        </Route>
-        <Route path="/livros/novolivro">
-          <NewBook onBookSubmit={onBookSubmit} />
-        </Route>
-        <Route path="/livros/:id">
-          <NewBook onBookSubmit={onBookSubmit} />
-        </Route>
+        <Switch>
+          <Redirect from="/" to="/livros" exact />
+
+          <Route path="/livros" exact>
+            <Books books={books} deleteBookHandler={deleteBookHandler} />
+          </Route>
+
+          <Route path="/livros/novolivro" exact>
+            <NewBook onBookSubmit={onBookSubmit} />
+          </Route>
+
+          <Route path="/livros/:id" exact>
+            <FullBook />
+          </Route>
+
+          <Route render={() => <div> Página não encontrada </div>} />
+
+        </Switch>
 
 
       </div>
