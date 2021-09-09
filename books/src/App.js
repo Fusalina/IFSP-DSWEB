@@ -1,8 +1,9 @@
 import { useState } from 'react';
-import logo from './logo.svg';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import Books from './components/Books/Books';
+import NewBook from './components/NewBook/NewBook';
+import Header from './components/Header/Header';
 import './App.css';
-import Book from './components/Book/Book'
-import BookCover from './components/Book/BookCover';
 
 function App() {
 
@@ -23,12 +24,14 @@ function App() {
     [
       {
         id: 0,
+        url: "https://site.claricelispector.ims.com.br/wp-content/uploads/2020/05/Capa_A_descoberta_do_mundo.jpg",
         name: "A descoberta do mundo",
         author: "Clarice Lispector",
         pages: "480"
       },
       {
         id: 1,
+        url: "https://m.media-amazon.com/images/I/61V6WTHOshL.jpg",
         name: "Gênero e desigualdades",
         author: "Flávia Biroli",
         pages: "210"
@@ -91,27 +94,24 @@ function App() {
   }
 
   return (
-    <div className="App">
+    <BrowserRouter>
+      <div className="App">
+        <Header />
+        <h1>Livros</h1>
+        <Redirect from="/" to="/livros" exact/>
+        <Route path="/livros" exact>
+          <Books books={books} deleteBookHandler={deleteBookHandler} />
+        </Route>
+        <Route path="/livros/novolivro">
+          <NewBook onBookSubmit={onBookSubmit} />
+        </Route>
+        <Route path="/livros/:id">
+          <NewBook onBookSubmit={onBookSubmit} />
+        </Route>
 
-      <form onSubmit={onBookSubmit}>
-        <input type="text" id="name" placeholder="Digite o nome do livro" />
-        <input type="text" id="author" placeholder="Digite o nome do autor(a)" />
-        <input type="text" id="pages" placeholder="Digite o número de páginas" />
-        <input type="submit" value="Cadastrar" />
-      </form>
-      
-      {booksCover.map((booksCover) => {
-        return (
-          <BookCover id={booksCover.id} urlSource={booksCover.urlSource}>Cover</BookCover>
-        )
-      })}
 
-
-      
-
-      {/* <button onClick={onHandleSubmit}>Adiciona um livro</button> */}
-
-    </div>
+      </div>
+    </BrowserRouter>
   );
 }
 

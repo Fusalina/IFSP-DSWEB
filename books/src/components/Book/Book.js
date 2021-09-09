@@ -4,13 +4,16 @@ import './Book.css';
 
 
 const Book = ( props ) => {
-    return(
+    return (
         <>
             <div className="Book">
-            <BookCover/>
-            <p onClick={props.click}>{props.name} - {props.author} - {props.pages} - {props.children}</p>
+                <p>{props.name}</p>
+                <p>{props.author} </p>
+                <p>{props.pages}</p>
+                <p>{props.children}</p>
+                <button onClick={props.click}>Apagar livro</button>
             </div>
-            
+
         </>
     )
 }
