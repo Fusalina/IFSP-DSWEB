@@ -36,6 +36,7 @@ function App() {
     ]
   );
 
+  /* // FUNÇAO DE INCREMENTAR UM LIVRO COM BOTAO
   const onHandleSubmit = () => {
     let newBooks = [...books, //tres pontos copiam os objetos dentro do vetor[books] e adicionam o objeto abaixo
     {
@@ -54,24 +55,62 @@ function App() {
     setBooks(newBooks);
     setBooksCover(newCover);
   }
+  */
+
+  const onBookSubmit = (event) => {
+    event.preventDefault();
+    console.log(event.target.name.value);
+    let newBooks = [...books,
+    {
+      id: books.length + 1,
+      name: event.target.name.value,
+      author: event.target.author.value,
+      pages: event.target.pages.value
+    }
+    ];
+    setBooks(newBooks)
+  }
+
+  /*
+  const onToogleBooks = () => {
+    setShowBooks(!showBooks);
+    if (style.backgroundColor === 'green') {
+      newStyle.backgroundColor = 'red';
+    } else {
+      newStyle.backgroundColor = 'green';
+    }
+    setStyle(newStyle);
+  }
+  */
+
+  const deleteBookHandler = (index) => {
+    let newBooks = books.slice();
+    newBooks.splice(index, 1);
+    setBooks(newBooks);
+    console.log(books);
+  }
 
   return (
     <div className="App">
+
+      <form onSubmit={onBookSubmit}>
+        <input type="text" id="name" placeholder="Digite o nome do livro" />
+        <input type="text" id="author" placeholder="Digite o nome do autor(a)" />
+        <input type="text" id="pages" placeholder="Digite o número de páginas" />
+        <input type="submit" value="Cadastrar" />
+      </form>
       
       {booksCover.map((booksCover) => {
         return (
           <BookCover id={booksCover.id} urlSource={booksCover.urlSource}>Cover</BookCover>
         )
       })}
+
+
       
-      
-      {books.map((book) => {
-        return (
-          <Book name={book.name} author={book.author}
-            pages={book.pages}>Esse livro é muito bom</Book>
-        )
-      })}
-      <button onClick={onHandleSubmit}>Adiciona um livro</button>
+
+      {/* <button onClick={onHandleSubmit}>Adiciona um livro</button> */}
+
     </div>
   );
 }
